@@ -1,0 +1,19 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+         <div class="card mt-4 mb-3">
+            <div class="card-body" style="background-color: brown;color: white;border-radius: 5px;">
+                <h5 class="card-title">{{ single_quote.title }} </h5>
+                <p class="card-text">Author:<span style=" font-weight: 700;color: navy;">{{ single_quote.author}}</span></p>
+                <p>Tags: <span style="color:navy;font-weight: 700;"> {{ single_quote.tag }}</span></p>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+{% endblock content %}

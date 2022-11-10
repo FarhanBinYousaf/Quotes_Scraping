@@ -1,0 +1,54 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="alert mt-3" style="font-weight: 600;background-color: brown;color: white;font-size: 19px;">Scraped Quotes from quotes site 
+            </div>
+            {% for quotes in quote_list %}
+            <div class="card mt-4 mb-3">
+                <div class="card-body">
+                    <a href="{% url 'quote' quotes.pk %}" style="text-decoration: none;color: black;font-weight: 600;"><h5 class="card-title">{{ quotes.title }}</h5></a>
+                    <p class="card-text">by: <span style="color:navy; font-weight: 700;">{{ quotes.author }}</span></p>
+                    <p>Tags: <span style="color:navy;font-weight: 700;"> {{ quotes.tag }}</span></p>
+                    <!-- </a> -->
+                </div>
+            </div>
+            {% endfor %}
+            {% if is_paginated %}
+            <!-- page_obj =>  -->
+            {% if page_obj.has_previous %}  
+            <a href="?page=1" class="btn btn-outline-info mb-4">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-info mb-4">Previous</a>
+            {% endif %}
+
+            <!-- num => means current page number -->
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <!-- This will show the current page number and is highlited -->
+            <a href="?page={{ num }}" class="btn btn-info mb-4">{{ num }}</a>
+
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+
+            <a href="?page={{ num }}" class="btn btn-outline-info mb-4">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-info mb-4">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-info mb-4">Last</a>
+            {% endif %}
+
+            {% endif %}
+
+            <div class="col-md-2"></div>
+        </div>
+    </div>    
+    <!-- </div> -->
+
+
+
+
+    {% endblock content %}
